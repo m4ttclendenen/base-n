@@ -2,4 +2,4 @@
 
 <b>TESTING</b>
 
-go test github.com\m4ttclendenen\basen -v
+go test github.com/m4ttclendenen/basen -v
