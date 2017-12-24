@@ -4,29 +4,67 @@ import "fmt"
 
 type BaseN struct {
     Charset []byte
+    BaseNDec map[string]int
+    DecBaseN map[int]string
     Base int
 }
 
 func NewBaseN(charset []byte, base int) (*BaseN) {
-    return &BaseN{
-        Charset: charset,
+    basendec := make(map[string]int)
+    decbasen := make(map[int]string)
+
+    for pos, char := range charset {
+        basendec[string(char)] = pos
+        decbasen[pos] = string(char)
+    }
+
+    return &BaseN {
+        Charset: charset
         Base: base,
+        BaseNDec: basendec,
+        DecBaseN: decbasen,
     }
 }
 
-// func reverse(array []byte) []byte {
-//     length := len(array)
-//     reversed := make([]byte, length)
-//     pos := 0
-//     for i := length - 1; i >= 0; i-- {
-//         reversed[pos] = array[i]
-//         pos++
-//     }
-//     return reversed
-// }
+// add byte arrays of base n
+func (basen *BaseN) Add(augend []byte, addend []byte) {
+    var long []byte
+    var short []byte
+    // designate long / short quantity
+    // reverse byte arrays
+    if len(augend) > len(addend) {
+        long = reverse(augend)
+        short = reverse(addend)
+    } else {
+        long = reverse(addend)
+        short = reverse(augend)
+    }
+
+    fmt.Printf("%s + %s", long, short)
+
+    for dec, char := range basen.DecBaseN {
+        fmt.Print(dec)
+        fmt.Println(" - " + char)
+    }
+
+    // for dec := basen.Base - 1
+
+}
+
+// reverse byte array
+func reverse(a []byte) []byte {
+    length := len(a)
+    reversed := make([]byte, length)
+    pos := 0
+    for i := length - 1; i >= 0; i-- {
+        reversed[pos] = a[i]
+        pos++
+    }
+    return reversed
+}
 
 // func (basen *BaseN) Add(augend []byte, addend []byte) []byte {
-func (basen *BaseN) Add() {
+// func (basen *BaseN) Add() {
     // var long []byte
     // var short []byte
     //
@@ -42,7 +80,7 @@ func (basen *BaseN) Add() {
     // carry := 0
     // var shortDec int
 
-    fmt.Printf("%+v", basen)
+    // fmt.Printf("%+v", basen)
     // for dec := basen.Base - 1; dec >= 0; dec-- {
     //     fmt.Println(dec)
     // }
@@ -80,4 +118,4 @@ func (basen *BaseN) Add() {
     // }
     // resultant = reverse(resultant)
     // return resultant
-}
+// }
