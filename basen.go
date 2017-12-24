@@ -1,7 +1,5 @@
 package basen
 
-// import "fmt"
-
 type BaseN struct {
     Charset []byte
     BaseNDec map[byte]int
