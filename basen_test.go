@@ -12,18 +12,16 @@ import (
 func TestBaseN (t *testing.T) {
     // new base n struct pointer
     // currently base 16
-    bn := NewBaseN([]byte("0123456789abcdef"), 16)
-
+    base62 := New([]byte("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"), 62)
 
     // what we are looking for
-    target := []byte("a0")
+    target := []byte("0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz")
     // where we are starting
-    current := []byte("00")
+    current := []byte("0")
     // what we will increment by
-    increment := []byte("01")
+    increment := []byte("1")
     // where we will end // if target not found in this block
-    end := []byte("f0")
-
+    end := []byte("4C92")
     // iterate / increment until we have either found the target
     // or we have reached the end of the block
     flag := false
@@ -39,7 +37,7 @@ func TestBaseN (t *testing.T) {
             flag = true
         // if not then, increment
         } else {
-            current = bn.Add(current, increment)
+            current = base62.Add(current, increment)
             fmt.Printf("%s\n",current)
         }
     }

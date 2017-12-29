@@ -1,3 +1,9 @@
+/*
+    Package BaseN implements addition and subtraction in any base given a charset
+
+    New Paramters
+
+*/
 package basen
 
 type BaseN struct {
@@ -7,7 +13,9 @@ type BaseN struct {
     Base int
 }
 
-func NewBaseN(charset []byte, base int) (*BaseN) {
+//
+func New(charset []byte, base int) (*BaseN) {
+    // these maps will be used
     basendec := make(map[byte]int)
     decbasen := make(map[int]byte)
 
